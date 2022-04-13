@@ -19,9 +19,9 @@ namespace GuildRosterModels
         [Required]
         public int RoleId { get; set; }
 
-        public virtual List<Player> Player { get; set; } = new List<Player>();
+        
         public virtual WowClass? WowClass { get; set; }
 
-        public virtual Role? Role { get; set; }
+        public virtual PlayerRole? Role { get; set; }
     }
 }

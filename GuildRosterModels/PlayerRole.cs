@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GuildRosterModels
 {
-    public class Role
+    public class PlayerRole
     {
         [Required]
         public int Id { get; set; }
