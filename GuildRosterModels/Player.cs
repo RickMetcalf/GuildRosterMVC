@@ -14,6 +14,8 @@ namespace GuildRosterModels
 
         [Required]
         public int WowClassId { get; set; }
+        [Required]
+        public int? SpecializationId { get; set; }
        
         
         [Required]
@@ -22,7 +24,8 @@ namespace GuildRosterModels
         [Required]
         public int GuildRankId { get; set; }
         public virtual WowClass? WowClass { get; set; }
-        
+        public virtual Specialization? Specialization { get; set; }
+
         public virtual PlayerRole? Role { get; set; }
         public virtual Team? Team { get; set; }
         public virtual GuildRank? GuildRank { get; set; }
