@@ -4,6 +4,7 @@ using GuildRosterMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuildRosterMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220413132254_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,6 +83,9 @@ namespace GuildRosterMVC.Data.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SpecializationId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
@@ -92,6 +97,8 @@ namespace GuildRosterMVC.Data.Migrations
                     b.HasIndex("GuildRankId");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("SpecializationId");
 
                     b.HasIndex("TeamId");
 
@@ -752,6 +759,10 @@ namespace GuildRosterMVC.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GuildRosterModels.Specialization", null)
+                        .WithMany("Player")
+                        .HasForeignKey("SpecializationId");
+
                     b.HasOne("GuildRosterModels.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
@@ -851,6 +862,11 @@ namespace GuildRosterMVC.Data.Migrations
                     b.Navigation("Players");
 
                     b.Navigation("Specs");
+                });
+
+            modelBuilder.Entity("GuildRosterModels.Specialization", b =>
+                {
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("GuildRosterModels.Team", b =>
