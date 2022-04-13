@@ -4,6 +4,7 @@ using GuildRosterMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuildRosterMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220413162132_AddedSpec")]
+    partial class AddedSpec
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,8 +83,7 @@ namespace GuildRosterMVC.Data.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SpecializationId")
-                        .IsRequired()
+                    b.Property<int>("SpecializationId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TeamId")
@@ -96,8 +97,6 @@ namespace GuildRosterMVC.Data.Migrations
                     b.HasIndex("GuildRankId");
 
                     b.HasIndex("RoleId");
-
-                    b.HasIndex("SpecializationId");
 
                     b.HasIndex("TeamId");
 
@@ -758,12 +757,6 @@ namespace GuildRosterMVC.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuildRosterModels.Specialization", "Specialization")
-                        .WithMany()
-                        .HasForeignKey("SpecializationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GuildRosterModels.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
@@ -777,8 +770,6 @@ namespace GuildRosterMVC.Data.Migrations
                     b.Navigation("GuildRank");
 
                     b.Navigation("Role");
-
-                    b.Navigation("Specialization");
 
                     b.Navigation("Team");
 
