@@ -20,6 +20,7 @@ namespace GuildRosterMVC.Views
             _context = context;
         }
 
+
         // GET: Players
         public async Task<IActionResult> Index()
         {
