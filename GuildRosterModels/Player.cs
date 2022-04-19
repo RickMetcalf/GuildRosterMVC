@@ -29,5 +29,10 @@ namespace GuildRosterModels
         public virtual PlayerRole? Role { get; set; }
         public virtual Team? Team { get; set; }
         public virtual GuildRank? GuildRank { get; set; }
+
+        public override string ToString()
+        {
+            return PlayerName + " ";
+        }
     }
 }

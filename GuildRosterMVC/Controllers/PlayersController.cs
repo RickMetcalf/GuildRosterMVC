@@ -24,7 +24,7 @@ namespace GuildRosterMVC.Views
         // GET: Players
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Players.Include(p => p.GuildRank).Include(p => p.Role).Include(p => p.Specialization).Include(p => p.Team).Include(p => p.WowClass);
+            var applicationDbContext = _context.Players.Include(p => p.GuildRank).Include(p => p.Role).Include(p => p.Specialization).Include(p => p.Team).Include(p => p.WowClass).OrderBy(p => p.GuildRankId);
             return View(await applicationDbContext.ToListAsync());
         }
 

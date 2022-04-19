@@ -23,7 +23,9 @@ namespace GuildRosterMVC.Controllers
         // GET: Teams
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Teams.ToListAsync());
+            var teams = _context.Teams.Include(t => t.Players);
+            
+            return View(await teams.ToListAsync());
         }
 
         // GET: Teams/Details/5
@@ -34,7 +36,7 @@ namespace GuildRosterMVC.Controllers
                 return NotFound();
             }
 
-            var team = await _context.Teams
+            var team = await _context.Teams.Include(t => t.Players)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (team == null)
             {
